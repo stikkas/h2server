@@ -1,14 +1,21 @@
-package ru.insoft.h2;
+package ru.insoft.h2.stores;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- *
+ * Functions for use in project sic-stores
  * @author stikkas<stikkas@yandex.ru>
  */
 public class H2Functions {
 
+    /**
+     * Get full number of fund. Full number is drawing as prefix-number-suffix
+     * @param number integer
+     * @param prefix string
+     * @param suffix string
+     * @return string presentation of full number
+     */
     public static String getFundFullNumber(Integer number, String prefix, String suffix) {
         String result = prefix;
         if (result != null && !result.isEmpty()) {
@@ -21,6 +28,12 @@ public class H2Functions {
         return result;
     }
 
+    /**
+     * Get string presentation of the years range
+     * @param start year of the beggining
+     * @param end year of the ending
+     * @return sring presentation
+     */
     public static String getYears(Integer start, Integer end) {
         if (start != null && end != null) {
             if (start.equals(end)) {
@@ -35,6 +48,14 @@ public class H2Functions {
         return "";
     }
 
+    /**
+     * Set right last number of the sequence
+     * @param conn sql connection
+     * @param sequenceName name of the sequence
+     * @param value number which sequence should be set
+     * @return new last number of the sequence
+     * @throws SQLException 
+     */
     public static Long setSequenceValue(Connection conn, String sequenceName, Long value) throws SQLException {
         conn.createStatement().execute("ALTER SEQUENCE " + sequenceName + " RESTART WITH " + value);
         return value;
