@@ -47,17 +47,4 @@ public class H2Functions {
         }
         return "";
     }
-
-    /**
-     * Set right last number of the sequence
-     * @param conn sql connection
-     * @param sequenceName name of the sequence
-     * @param value number which sequence should be set
-     * @return new last number of the sequence
-     * @throws SQLException 
-     */
-    public static Long setSequenceValue(Connection conn, String sequenceName, Long value) throws SQLException {
-        conn.createStatement().execute("ALTER SEQUENCE " + sequenceName + " RESTART WITH " + value);
-        return value;
-    }
 }
